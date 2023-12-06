@@ -53,7 +53,7 @@ function DriveBy:OnDisable()
 end
 
 function detectBuff(self, event, msg, author, tar)
-	if CombatLogGetCurrentEventInfo(timestampchangeme, _AURA_APPLIED)  
+	--if CombatLogGetCurrentEventInfo(timestampchangeme, _AURA_APPLIED)  
 end
 -- CombatLogGetCurrentEventInfo(timestampchangeme, _AURA_APPLIED)
 
