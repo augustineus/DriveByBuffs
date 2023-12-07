@@ -5,36 +5,41 @@ DriveBy = LibStub("AceAddon-3.0"):NewAddon("DriveBy", "AceConsole-3.0", "AceEven
 -- using either a spell name to trace back to any spell id, or using the combat log, target the player that cast the spell then use a bank of emotes to emote back at them
 
 --create a frame to print the combat log to that is hidden
-local frame = CreateFrame("Frame", nil, UIParent);
--- hide frame/make 0 size
---frame:SetFrameStrata("BACKGROUND");
-frame:SetPoint("CENTER")
-frame:SetSize(64, 64)
--- frame:SetWidth(500);
--- frame:SetHeight(500);
---add the CLEU to the frame
-frame:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
-frame:SetScript("OnEvent", OnEvent)
-frame.tex = frame:CreateTexture()
-frame.tex:SetAllPoints(frame)
-frame.tex:SetTexture("interface/icons/inv_mushroom_11")
---print all unfiltered combat log events to a hidden frame
 
 local function OnEvent(self, event)
-	print(CombatLogGetCurrentEventInfo())
-	print("event detected")
+	CombatLogGetCurrentEventInfo()
+	if (event == "COMBAT_LOG_EVENT_UNFILTERED") then
+		print(CombatLogGetCurrentEventInfo())
+		if ((arg9 == name)) then
+			print("made it down here")
+			DoEmote("CHEER")
+		end
+	end
 end
+
+local frame = CreateFrame("Frame");
+--[[frame:SetFrameStrata("BACKGROUND");
+frame:SetWidth(500);
+frame:SetHeight(500);
+not sure if necessary since its already invisible?]]--
+--add the CLEU to the frame
+frame:SetPoint("CENTER")
+frame:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
+frame:SetScript("OnEvent", OnEvent)
+--print all unfiltered combat log events to a hidden frame
 
 function DriveBy:OnInitialize()
 	-- called when addon is loaded
 	self:Print("Thanks for using DriveBy!")
-	name = C_PlayerInfo.GetName
+	-- name = C_PlayerInfo.GetName(playerLocation)
+	-- DoEmote("CHEER") know this works alone
 end
 
 function DriveBy:OnEnable()
 	-- called when started
 	self:Print("DriveBy RP Started")
-	self:RegisterEvent("")
+	name = UnitName("player")
+	--self:RegisterEvent("")
 end
 
 function DriveBy:OnDisable()
