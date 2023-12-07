@@ -1,38 +1,28 @@
-WelcomeHome = LibStub("AceAddon-3.0"):NewAddon("WelcomeHome", "AceConsole-3.0")
-
-function WelcomeHome:OnInitialize()
-	-- Called when the addon is loaded
-	self:Print("Hello World!")
-end
-
-function WelcomeHome:OnEnable()
-	-- Called when the addon is enabled
-end
-
-function WelcomeHome:OnDisable()
-	-- Called when the addon is disabled
-end
+DriveBy = LibStub("AceAddon-3.0"):NewAddon("DriveBy", "AceConsole-3.0", "AceEvent-3.0")
 
 -- double checking that the addon works
-
 -- ideas for dev
-
 -- using either a spell name to trace back to any spell id, or using the combat log, target the player that cast the spell then use a bank of emotes to emote back at them
 
-DriveBy = LibStub("AceAddon-3.0"):NewAddon("WelcomeHome", "AceConsole-3.0", "AceEvent-3.0")
-
 --create a frame to print the combat log to that is hidden
-local frame = createFrame("Frame", "CombatLogHandler_Obi");
+local frame = CreateFrame("Frame", nil, UIParent);
 -- hide frame/make 0 size
-frame:SetFrameStrata("BACKGROUND");
-frame:SetWidth(0);
-frame:SetHeight(0);
+--frame:SetFrameStrata("BACKGROUND");
+frame:SetPoint("CENTER")
+frame:SetSize(64, 64)
+-- frame:SetWidth(500);
+-- frame:SetHeight(500);
 --add the CLEU to the frame
 frame:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 frame:SetScript("OnEvent", OnEvent)
+frame.tex = frame:CreateTexture()
+frame.tex:SetAllPoints(frame)
+frame.tex:SetTexture("interface/icons/inv_mushroom_11")
 --print all unfiltered combat log events to a hidden frame
+
 local function OnEvent(self, event)
 	print(CombatLogGetCurrentEventInfo())
+	print("event detected")
 end
 
 function DriveBy:OnInitialize()
@@ -51,7 +41,7 @@ function DriveBy:OnDisable()
 	-- called when turned off
 	self:Print("DriveBy RP Stopped")
 end
-
+--[[
 function detectBuff(self, event, msg, author, tar)
 	--if CombatLogGetCurrentEventInfo(timestampchangeme, _AURA_APPLIED)  
 end
@@ -76,4 +66,4 @@ f:SetScript("OnEvent", function(self, event)
 		local action = spellId and GetSpellLink(spellId) or MELEE
 		print(MSG_CRITICAL_HIT:format(action, destName, amount))
 	end
-end)
+end) ]]
