@@ -40,3 +40,5 @@ end)
 function DriveBy:OnDisable()
 	self:Print("DriveBy RP Stopped")
 end
+
+-- next steps: open a settings panel to turn off specific emotes, disable party/raid emoting, add your own emotes?
