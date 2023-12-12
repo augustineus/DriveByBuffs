@@ -1,3 +1,11 @@
+--[[LEFT OFF NOTES
+
+args table SHOULD look like example below, unsure how to print entire table?
+
+getter called 20 times (once per #emotes) and no checkmarks are changing/when they do its all 20 of them
+
+]] 
+
 DriveBy = LibStub("AceAddon-3.0"):NewAddon("DriveBy", "AceConsole-3.0", "AceEvent-3.0")
 local AC = LibStub("AceConfig-3.0")
 local ACD = LibStub("AceConfigDialog-3.0")
@@ -14,24 +22,31 @@ local options = {
 	name = "DriveBy",
 	handler = DriveBy,
 	type = "group",
-	args = {
-		msg = {
-			type = "input",
-			name = "Message",
-			desc = "The message to be displayed when you get home.",
-			usage = "<Your message>",
-			get = "GetMessage",
-			set = "SetMessage",
-		},
-		showOnScreen = {
-			type = "toggle",
-			name = "Show on Screen",
-			desc = "Toggles the display of the message on the screen.",
-			get = "IsShowOnScreen",
-			set = "ToggleShowOnScreen"
-		},
-	},
+	args = {},
 }
+
+-- create bank of emotes
+local emotes = {"AMAZE", "APPLAUD", "BASHFUL", "BLUSH", "BOW", "BURP", "CHEER", "CLAP", "FART", "HAIL", "HAPPY", "HUG", "KISS", "SALUTE", "SEXY", "THANK", "CUDDLE", "PRAISE", "COMMEND", "FLIRT"}
+function randEmote()
+	return emotes[math.random(1, #emotes)]
+end
+
+function allEmoteOptions()
+	for i, e in ipairs(emotes) do
+		local basics = {
+			type = "toggle",
+			name = "",
+			desc = "Toggles the emote bank to include ",
+			get = "isActive",
+			set = "setActive"
+		}
+		-- insert emote into a basic template
+		basics['name'] = string.lower(e)
+		basics['desc'] = basics['desc'] .. string.lower(e) .. "."
+		--insert basic template into the option arguments
+		options.args[e] = basics
+	end
+end
 
 -- called when addon is loaded
 function DriveBy:OnInitialize()
@@ -44,6 +59,7 @@ function DriveBy:OnInitialize()
 
 	-- register slash commands
 	self:RegisterChatCommand("driveby", "SlashCommand")
+	allEmoteOptions()
 end
 
 -- called when started
@@ -62,12 +78,6 @@ f:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 -- define player name
 local playerGUID = UnitGUID("player")
 
--- create bank of emotes
-local emotes = {"AMAZE", "APPLAUD", "BASHFUL", "BLUSH", "BOW", "BURP", "CHEER", "CLAP", "FART", "HAIL", "HAPPY", "HUG", "KISS", "SALUTE", "SEXY", "THANK", "CUDDLE", "PRAISE", "COMMEND", "FLIRT"}
-function randEmote()
-	return emotes[math.random(1, #emotes)]
-end
-
 --create emote command
 f:SetScript("OnEvent", function(self, event)
 	local ts, subevent, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlags, destGUID, destName, destFlags, destRaidFlags, _, buff = CombatLogGetCurrentEventInfo()
@@ -77,21 +87,15 @@ f:SetScript("OnEvent", function(self, event)
 	end
 end)
 
--- set values for the example above
-function DriveBy:GetMessage(info)
-	return self.db.profile.message
+-- get/set emote value
+function DriveBy:isActive(info)
+	print("getter called")
+	return self.db.profile.isActive
 end
 
-function DriveBy:SetMessage(info, value)
-	self.db.profile.message = value
-end
-
-function DriveBy:IsShowOnScreen(info)
-	return self.db.profile.showOnScreen
-end
-
-function DriveBy:ToggleShowOnScreen(info, value)
-	self.db.profile.showOnScreen = value
+function DriveBy:setActive(info, value)
+	print("setter called")
+	self.db.profile.setActive = value
 end
 
 -- called when turned off
