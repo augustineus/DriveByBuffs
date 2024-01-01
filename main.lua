@@ -1,8 +1,5 @@
 --[[LEFT OFF NOTES
 
-args table SHOULD look like example below, unsure how to print entire table?
-
-getter called 20 times (once per #emotes) and no checkmarks are changing/when they do its all 20 of them
 
 ]] 
 
