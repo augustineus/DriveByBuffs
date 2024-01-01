@@ -31,7 +31,7 @@ function randEmote()
 	return emotes[math.random(1, #emotes)]
 end
 
-function allEmoteOptions()
+--[[function allEmoteOptions()
 	for i, e in ipairs(emotes) do
 		local basics = {
 			type = "toggle",
@@ -47,29 +47,29 @@ function allEmoteOptions()
 		options.args[e] = basics
 	end
 end
-
+]]--
 -- called when addon is loaded
 function DriveBy:OnInitialize()
 	-- create a db to save settings to
 	self.db = LibStub("AceDB-3.0"):New("DriveBy", defaults, true)
-	AC:RegisterOptionsTable("DriveBy_options", options)
-	self.optionsFrame = ACD:AddToBlizOptions("DriveBy_options", "DriveBy")
+	--AC:RegisterOptionsTable("DriveBy_options", options)
+	--self.optionsFrame = ACD:AddToBlizOptions("DriveBy_options", "DriveBy")
 
 	self:Print("Thanks for using DriveBy!")
 
 	-- register slash commands
 	self:RegisterChatCommand("driveby", "SlashCommand")
-	allEmoteOptions()
+	--allEmoteOptions()
 end
 
 -- called when started
 function DriveBy:OnEnable()
-	self:Print("Use /driveby to open the options panel.")
+	--self:Print("Use /driveby to open the options panel.")
 end
 
 -- create a slash command
 function DriveBy:SlashCommand(msg)
-	InterfaceOptionsFrame_OpenToCategory(self.optionsFrame)
+	--InterfaceOptionsFrame_OpenToCategory(self.optionsFrame)
 end
 --create a hidden frame
 local f = CreateFrame("Frame");
@@ -89,13 +89,11 @@ end)
 
 -- get/set emote value
 function DriveBy:isActive(info)
-	print("getter called")
-	return self.db.profile.isActive
+	--return self.db.profile.isActive
 end
 
 function DriveBy:setActive(info, value)
-	print("setter called")
-	self.db.profile.setActive = value
+	--self.db.profile.setActive = value
 end
 
 -- called when turned off
