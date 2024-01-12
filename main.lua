@@ -1,11 +1,11 @@
-DriveBy = LibStub("AceAddon-3.0"):NewAddon("DriveBy", "AceConsole-3.0", "AceEvent-3.0")
+DriveByBuffs = LibStub("AceAddon-3.0"):NewAddon("DriveByBuffs", "AceConsole-3.0", "AceEvent-3.0")
 
-function DriveBy:OnInitialize()
-	self:Print("Thanks for using DriveBy!")
+function DriveByBuffs:OnInitialize()
+	self:Print("Thanks for using DriveByBuffs!")
 end
 
-function DriveBy:OnEnable()
-	self:Print("DriveBy RP Started")
+function DriveByBuffs:OnEnable()
+	self:Print("DriveByBuffs RP Started")
 end
 
 local f = CreateFrame("Frame");
@@ -25,6 +25,6 @@ f:SetScript("OnEvent", function(self, event)
 	end
 end)
 
-function DriveBy:OnDisable()
-	self:Print("DriveBy RP Stopped")
+function DriveByBuffs:OnDisable()
+	self:Print("DriveByBuffs RP Stopped")
 end
