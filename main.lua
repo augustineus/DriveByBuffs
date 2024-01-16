@@ -32,12 +32,12 @@ local playerGUID = UnitGUID("player")
 local f = CreateFrame("Frame");
 f:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 f:SetScript("OnEvent", function(self, event)
+
 	local ts, subevent, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlags, destGUID, destName, destFlags, destRaidFlags, _, buff = CombatLogGetCurrentEventInfo()
-	print(CombatLogGetCurrentEventInfo())
+	
 	if locate(validBuffs, buff) then 
 		if destGUID == playerGUID and sourceGUID ~= playerGUID and subevent == "SPELL_CAST_SUCCESS" then
 			DoEmote(randEmote(), sourceName)
 		end
 	end
 end)
-
