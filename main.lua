@@ -16,12 +16,24 @@ function randEmote()
 	return emotes[math.random(1, #emotes)]
 end
 
+local validBuffs = {"Arcane Intellect", "Power Word: Fortitude", "Mark of the Wild", "Thorns", "Blessing of Wisdom", "Blessing of Might", "Blessing of Kings"}
+
+local function locate(table, value)
+	for i = 1, #table do
+		if table[i] == value then 
+		 return true 
+		end
+	end
+end
+
 local playerGUID = UnitGUID("player")
 
 f:SetScript("OnEvent", function(self, event)
 	local ts, subevent, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlags, destGUID, destName, destFlags, destRaidFlags, _, buff = CombatLogGetCurrentEventInfo()
-	if buff ~= -1 and destGUID == playerGUID and sourceGUID ~= playerGUID then
-		DoEmote(randEmote(), sourceName)
+	if locate(validBuffs, buff) then 
+		if destGUID == playerGUID and sourceGUID ~= playerGUID then
+			DoEmote(randEmote(), sourceName)
+		end
 	end
 end)
 
