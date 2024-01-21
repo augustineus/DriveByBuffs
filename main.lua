@@ -1,7 +1,19 @@
 DriveByBuffs = LibStub("AceAddon-3.0"):NewAddon("DriveByBuffs", "AceConsole-3.0", "AceEvent-3.0")
+local AC = LibStub("AceConfig-3.0")
+local ACD = LibStub("AceConfigDialog-3.0")
+
+local function locate(table, value)
+	for i = 1, #table do
+		if table[i] == value then 
+		 return true 
+		end
+	end
+end
 
 function DriveByBuffs:OnInitialize()
 	self:Print("Thanks for using DriveByBuffs!")
+	self:RegisterChatCommand("dbb", "SlashCommand")
+	allEmoteOptions()
 end
 
 function DriveByBuffs:OnEnable()
@@ -12,11 +24,70 @@ function DriveByBuffs:OnDisable()
 	self:Print("DriveByBuffs RP Stopped")
 end
 
-local function locate(table, value)
-	for i = 1, #table do
-		if table[i] == value then 
-		 return true 
-		end
+local options = {
+	name = "DriveByBuffs",
+	handler = DriveByBuffs,
+	type = "group",
+	args = {
+		msg = {
+			type = "input",
+			name = "Message",
+			desc = "The message to be displayed when you get home.",
+			usage = "<Your message>",
+			get = "GetMessage",
+			set = "SetMessage",
+		},
+		showOnScreen = {
+			type = "toggle",
+			name = "Show on Screen",
+			desc = "Toggles the display of the message on the screen.",
+			get = "IsShowOnScreen",
+			set = "ToggleShowOnScreen"
+		},
+	},
+}
+
+function DriveBy:GetMessage(info)
+	return self.db.profile.message
+end
+
+function DriveBy:SetMessage(info, value)
+	self.db.profile.message = value
+end
+
+function DriveBy:IsShowOnScreen(info)
+	return self.db.profile.showOnScreen
+-- get/set emote value
+end 
+
+function DriveBy:isActive(info)
+	print("getter called")
+	return self.db.profile.isActive
+end
+
+function DriveBy:ToggleShowOnScreen(info, value)
+	self.db.profile.showOnScreen = value
+end 
+
+function DriveBy:setActive(info, value)
+	print("setter called")
+	self.db.profile.setActive = value
+end
+
+function allEmoteOptions()
+	for i, e in ipairs(emotes) do
+		local basics = {
+			type = "toggle",
+			name = "",
+			desc = "Toggles the emote bank to include ",
+			get = "isActive",
+			set = "setActive"
+		}
+		-- insert emote into a basic template
+		basics['name'] = string.lower(e)
+		basics['desc'] = basics['desc'] .. string.lower(e) .. "."
+		--insert basic template into the option arguments
+		options.args[e] = basics
 	end
 end
 
