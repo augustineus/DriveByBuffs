@@ -1,18 +1,19 @@
 ## Interface: 11404
 ## Title: DriveByBuffs
 ## Author: Tim Ortega
-## Version: 1.0.2
-## SavedVariables: DriveByDB
+## Version: 1.0.3
+## SavedVariables: DBBDB
 ## OptionalDeps: Ace3
 
-Libs\LibStub\LibStub.lua
-Libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
-Libs\AceAddon-3.0\AceAddon-3.0.xml
-Libs\AceEvent-3.0\AceEvent-3.0.xml
-Libs\AceDB-3.0\AceDB-3.0.xml
-Libs\AceDBOptions-3.0\AceDBOptions-3.0.xml
-Libs\AceConsole-3.0\AceConsole-3.0.xml
-Libs\AceGUI-3.0\AceGUI-3.0.xml
-Libs\AceConfig-3.0\AceConfig-3.0.xml
+..\Ace3\LibStub\LibStub.lua
+..\Ace3\CallbackHandler-1.0\CallbackHandler-1.0.xml
+..\Ace3\AceAddon-3.0\AceAddon-3.0.xml
+..\Ace3\AceEvent-3.0\AceEvent-3.0.xml
+..\Ace3\AceDB-3.0\AceDB-3.0.xml
+..\Ace3\AceDBOptions-3.0\AceDBOptions-3.0.xml
+..\Ace3\AceConsole-3.0\AceConsole-3.0.xml
+..\Ace3\AceGUI-3.0\AceGUI-3.0.xml
+..\Ace3\AceConfig-3.0\AceConfig-3.0.xml
 
+DriveByBuffs.xml
 main.lua

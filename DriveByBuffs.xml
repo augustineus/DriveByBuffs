@@ -1,0 +1,10 @@
+<Scripts>
+  <OnLoad>
+    this:RegisterEvent("VARIABLES_LOADED");
+  </OnLoad>
+  <OnEvent>
+    if (event == "VARIABLES_LOADED") then
+      dbb_Loaded();
+    end
+  </OnEvent>
+</Scripts>
