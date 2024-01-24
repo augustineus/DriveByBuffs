@@ -2,7 +2,7 @@
 ## Title: DriveByBuffs
 ## Author: Tim Ortega
 ## Version: 1.0.3
-## SavedVariables: DBBDB
+## SavedVariables: DriveByBuffsDB
 ## OptionalDeps: Ace3
 
 ..\Ace3\LibStub\LibStub.lua
