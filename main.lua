@@ -52,16 +52,16 @@ args = {},
 
 function DriveByBuffs:OnInitialize()
 	self:Print("Thanks for using DriveByBuffs!")
-	self.db = LibStub("AceDB-3.0"):New("DriveByBuffsDB", defaults, true)
+	DriveByBuffsDB = DriveByBuffsDB or CopyTable(dbb_Defaults)
+	self.db = DriveByBuffsDB
 	LibStub("AceConfig-3.0"):RegisterOptionsTable("DriveByBuffs", dbb_Options)
 	self.optionsFrame = LibStub("AceConfigDialog-3.0"):AddToBlizOptions("DriveByBuffs", "DriveByBuffs")
 	self:RegisterChatCommand("dbb", "SlashCommand")
-	self.message = "DBB Options A Go!"
 	allEmoteOptions()
 end
 
 function DriveByBuffs:OnEnable()
-	self:Print("DriveByBuffs RP Started")
+	self:Print("Type /dbb to toggle which emotes you want to 'thank' people with.")
 end
 
 function DriveByBuffs:OnDisable()
@@ -69,15 +69,17 @@ function DriveByBuffs:OnDisable()
 end
 
 function DriveByBuffs:SlashCommand(msg)
-InterfaceOptionsFrame_OpenToCategory(self.optionsFrame)
+	InterfaceOptionsFrame_OpenToCategory(self.optionsFrame)
 end
 
 function DriveByBuffs:isActive(info)
-	return self.db.profile.isActive
+	print("getter called")
+	return DriveByBuffs.db.isActive
 end
 
 function DriveByBuffs:setActive(info, value)
-	self.db.profile.setActive = value
+	print("setter called")
+	DriveByBuffs.db.setActive = value
 end
 
 local emotes = {"AMAZE", "APPLAUD", "BASHFUL", "BLUSH", "BOW", "BURP", "CHEER", "CLAP", "FART", "HAIL", "HAPPY", "HUG", "KISS", "SALUTE", "SEXY", "THANK", "CUDDLE", "PRAISE", "COMMEND", "FLIRT"}
@@ -91,8 +93,8 @@ function allEmoteOptions()
 			type = "toggle",
 			name = "",
 			desc = "Toggles the emote bank to include ",
-			get = function(info,val) DriveByBuffs.enabled = val end,
-			set = function(info) return DriveByBuffs.enabled end
+			get = DriveByBuffs.isActive(e),
+			set = DriveByBuffs.setActive(e, not value)
 		}
 		-- insert emote into a basic template
 		basics['name'] = string.lower(e)
