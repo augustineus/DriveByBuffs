@@ -1,7 +1,7 @@
-## Interface: 11404
+## Interface: 11501
 ## Title: DriveByBuffs
 ## Author: Tim Ortega
-## Version: 1.0.2
+## Version: 1.0.3
 ## SavedVariables: DriveByDB
 ## OptionalDeps: Ace3
 
