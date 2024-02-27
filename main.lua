@@ -21,7 +21,7 @@ local function locate(table, value)
 end
 
 --local emotes = {"AMAZE", "BLUSH", "BOW", "BURP", "CHEER", "CLAP", "FART", "HAIL", "HAPPY", "HUG", "KISS", "SALUTE", "SEXY", "THANK", "CUDDLE", "PRAISE", "COMMEND", "FLIRT"}
-local emotes = {"is amazed by ", "blushes at ", "bow before ", "cheers for ", "claps for ", "is happy with ", "hugs ", "blows a kiss at ", "salutes ", "thanks ", 
+local emotes = {"is amazed by ", "blushes at ", "bows before ", "cheers for ", "claps for ", "is happy with ", "hugs ", "blows a kiss at ", "salutes ", "thanks ", 
 								"cuddles up to ", "highly praises ", "gives many commendations to ", "flirts with "}
 function randEmote()
 	return emotes[math.random(1, #emotes)]
