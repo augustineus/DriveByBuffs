@@ -27,8 +27,9 @@ function randEmote()
 	return emotes[math.random(1, #emotes)]
 end
 
-local validBuffs = {"Arcane Intellect", "Power Word: Fortitude", "Mark of the Wild", "Thorns", "Blessing of Wisdom", "Blessing of Might", "Blessing of Kings", "Blessing of Sanctuary", "Divine Spirit", "Shadow Protection"}
---"Arcane Brilliance", "Gift of the Wild", "Greater Blessing of Might", "Greater Blessing of Widsom", "Greater Blessing of Kings", "Greater Blessing of Sanctuary", "Prayer of Fortitude", "Prayer of Spirit", "Focus Magic", "Power Infusion", "Tricks of the Trade", "Unholy Frenzy", "Divine Guardian"}
+local validBuffs = {"Arcane Intellect", "Power Word: Fortitude", "Mark of the Wild", "Thorns", "Blessing of Wisdom", "Blessing of Might", "Blessing of Kings", 
+"Blessing of Sanctuary", "Blessing of Light", "Divine Spirit", "Shadow Protection", "Detect Greater Invisibility", "Detect Invisibility", "Detect Lesser Invisibility",
+"Unending Breath"}
 
 local function createString(name, buff)
 	e = randEmote()
